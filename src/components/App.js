@@ -18,7 +18,7 @@ const App = () => {
         dispatch(addContact(storedContacts));
       }
     } catch (error) {
-      console.error('Error while loading contacts from localStorage:', error);
+      console.error('Error while loading contacts from localStorageee:', error);
     }
   }, [dispatch]);
 
