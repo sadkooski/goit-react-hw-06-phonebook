@@ -4,7 +4,7 @@ import { Filter } from 'components/Filter/Filter';
 import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact, setFilter } from 'redux/actions';
+import { addContact } from 'redux/actions';
 
 const App = () => {
   const contacts = useSelector(state => state.contacts);
@@ -30,11 +30,6 @@ const App = () => {
     }
   }, [contacts]);
 
-  const handleBrowser = evt => {
-    const filterValue = evt.target.value.toLowerCase();
-    dispatch(setFilter(filterValue));
-  };
-
   const filteredContacts = contacts.filter(
     contact =>
       typeof contact.name === 'string' &&
@@ -57,7 +52,7 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm />
       <h2>Contacts</h2>
-      <Filter handler={handleBrowser} />
+      <Filter />
       {contactsStatus > 0 &&
         filteredContacts.map(contact => (
           <ContactList

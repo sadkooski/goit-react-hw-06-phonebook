@@ -22,6 +22,11 @@ export const ContactForm = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
 
+    if (!name || !number) {
+      alert('Name and number are required fields.');
+      return;
+    }
+
     const existingContact = contacts.find(contact => contact.name === name);
 
     if (existingContact) {

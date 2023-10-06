@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux';
-import { initialState } from './store';
+
+export const initialState = {
+  contacts: JSON.parse(localStorage.getItem('contacts')) || [],
+  filter: '',
+};
 
 const contactsReducer = (state = initialState.contacts, action) => {
   switch (action.type) {
