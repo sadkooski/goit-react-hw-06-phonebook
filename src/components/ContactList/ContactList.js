@@ -1,20 +1,24 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/actions';
-// import { useSelector } from 'react-redux';
 
-export const ContactList = ({ id, number, name }) => {
+export const ContactList = ({ contacts }) => {
   const dispatch = useDispatch();
 
   return (
     <div>
       <ul>
-        <li key={id}>
-          {name} {number}
-          <button onClick={() => dispatch(deleteContact(id))} name={name}>
-            Delete
-          </button>
-        </li>
+        {contacts.map(contact => (
+          <li key={contact.id}>
+            {contact.name} {contact.number}
+            <button
+              onClick={() => dispatch(deleteContact(contact.id))}
+              name={contact.name}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
       </ul>
     </div>
   );

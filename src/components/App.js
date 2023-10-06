@@ -1,10 +1,9 @@
-import { ContactForm } from 'components/ContactForm/ContactForm';
-import { ContactList } from 'components/ContactList/ContactList';
-import { Filter } from 'components/Filter/Filter';
 import React, { useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/actions';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { Filter } from 'components/Filter/Filter';
+import { ContactList } from 'components/ContactList/ContactList';
 
 const App = () => {
   const contacts = useSelector(state => state.contacts);
@@ -18,7 +17,7 @@ const App = () => {
         dispatch(addContact(storedContacts));
       }
     } catch (error) {
-      console.error('Error while loading contacts from localStorageee:', error);
+      console.error('Error while loading contacts from localStorage:', error);
     }
   }, [dispatch]);
 
@@ -35,7 +34,6 @@ const App = () => {
       typeof contact.name === 'string' &&
       contact.name.toLowerCase().includes(filter)
   );
-  const contactsStatus = filteredContacts.length;
 
   return (
     <div
@@ -53,15 +51,9 @@ const App = () => {
       <ContactForm />
       <h2>Contacts</h2>
       <Filter />
-      {contactsStatus > 0 &&
-        filteredContacts.map(contact => (
-          <ContactList
-            key={contact.id}
-            id={contact.id}
-            number={contact.number}
-            name={contact.name}
-          />
-        ))}
+      {filteredContacts.length > 0 && (
+        <ContactList contacts={filteredContacts} />
+      )}
     </div>
   );
 };
